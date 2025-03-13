@@ -80,7 +80,7 @@ Retorna: Content-Type: audio/wav
 
 ```
 GET /api/v1/text-to-speech/async?language=pt-br&voice=Dinis&text=Bom dia
- 
+
 Resposta:
  {
 	"id": 45543915047145 // este id será utilizado para consulta
