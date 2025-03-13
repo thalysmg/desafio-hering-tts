@@ -3,6 +3,8 @@
 ## Efetuar melhorias
 
 1. quando a internet cai (no servidor) ocorre erro e não exibe nem armazena detalhes, dificultando diagnóstico em produção, resolver isso
+   Além de adicionar logs. O kafka possui uma política de retry exponencial. Iniciando as tentativas após 30 segundos e multiplicando por 2
+   o tempo de espera para as próximas tentativas, executando um total de 5 tentativas.
 2. implementar GET /api/v1/text-to-speech?status=COMPLETED&status=PROCESSING possibilitando listar as consultas
 3. criar um pequeno front (html e js puro) embedded no spring para [testes rápidos na api](https://www.voicerss.org/api/demo.aspx).
 
