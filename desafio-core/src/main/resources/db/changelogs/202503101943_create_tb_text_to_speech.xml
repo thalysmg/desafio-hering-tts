@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+>
+    <changeSet id="202503101943" author="thalys.gadelha">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="text_to_speech"/>
+            </not>
+        </preConditions>
+        <createTable tableName="text_to_speech">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="moment" type="TIMESTAMP" defaultValueDate="NOW()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="language" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voice" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="error_text" type="TEXT"/>
+            <column name="audio_wav_bytes" type="MEDIUMBLOB"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

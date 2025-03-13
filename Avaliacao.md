@@ -20,7 +20,13 @@
 ## Questões descritivas
 
 6. Descreva sua visão sobre performance em bancos relacionais (SQL) e quais os principais recursos que você usa para manter leitura e escrita rápidas.
+    - Resposta: Para consultas podemos otimizar a performance trazendo apenas as colunas necessárias e fazendo os joins necessários. Além disso,
+    podemos fazer o uso de indices que melhoram drasticamente a performance dessas operações.
+
 7. Na sua opinião como podemos nos proteger de ataques a nossa API e quais são os principais problemas aos quais estamos expostos.
+    - Resposta: Acredito que implementar autenticação e autorização é uma ótima forma de proteger a API de usuários não desejados
+    e fazer o uso de ferramentas como um firewall, por exemplo, pode ajudar a bloquear inúmeras requisições feitas em sequência
+   (ataques DDoS). Outra alternativa é configurar quais os IPs que podem acessar à API via SpringSecurity
 
 ## Bônus
 

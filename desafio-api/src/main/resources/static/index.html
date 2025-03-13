@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Speech</title>
+  <script>
+    // Voice options grouped by language
+    const languagesVoices = [
+      {
+        language: 'Arabic (Egypt)',
+        code: 'ar-eg',
+        voices: [
+          { name: 'Oda', sex: '(Female)' }
+        ]
+      },
+      {
+        language: 'Arabic (Saudi Arabia)',
+        code: 'ar-sa',
+        voices: [
+          { name: 'Salim', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'Bulgarian',
+        code: 'bg-bg',
+        voices: [
+          { name: 'Dimo', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'Catalan',
+        code: 'ca-es',
+        voices: [
+          { name: 'Rut', sex: '(Female)' }
+        ]
+      },
+      {
+        language: 'Chinese (China)',
+        code: 'zh-cn',
+        voices: [
+          { name: 'Luli', sex: '(Female)' },
+          { name: 'Shu', sex: '(Female)' },
+          { name: 'Chow', sex: '(Female)' },
+          { name: 'Wang', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'Chinese (Hong Kong)',
+        code: 'zh-hk',
+        voices: [
+          { name: 'Jia', sex: '(Female)' },
+          { name: 'Xia', sex: '(Female)' },
+          { name: 'Chen', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'Chinese (Taiwan)',
+        code: 'zh-tw',
+        voices: [
+          { name: 'Akemi', sex: '(Female)' },
+          { name: 'Lin', sex: '(Female)' },
+          { name: 'Lee', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'Croatian',
+        code: 'hr-hr',
+        voices: [
+          { name: 'Nikola', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'Czech',
+        code: 'cs-cz',
+        voices: [
+          { name: 'Josef', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'Danish',
+        code: 'da-dk',
+        voices: [
+          { name: 'Freja', sex: '(Female)' }
+        ]
+      },
+      {
+        language: 'Dutch (Belgium)',
+        code: 'nl-be',
+        voices: [
+          { name: 'Daan', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'Dutch (Netherlands)',
+        code: 'nl-nl',
+        voices: [
+          { name: 'Lotte', sex: '(Female)' },
+          { name: 'Bram', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'English (Australia)',
+        code: 'en-au',
+        voices: [
+          { name: 'Zoe', sex: '(Female)' },
+          { name: 'Isla', sex: '(Female)' },
+          { name: 'Evie', sex: '(Female)' },
+          { name: 'Jack', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'English (Canada)',
+        code: 'en-ca',
+        voices: [
+          { name: 'Rose', sex: '(Female)' },
+          { name: 'Clara', sex: '(Female)' },
+          { name: 'Emma', sex: '(Female)' },
+          { name: 'Mason', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'English (India)',
+        code: 'en-in',
+        voices: [
+          { name: 'Eka', sex: '(Female)' },
+          { name: 'Jai', sex: '(Male)' },
+          { name: 'Ajit', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'English (Ireland)',
+        code: 'en-ie',
+        voices: [{ name: 'Oran', sex: '(Male)' }]
+      },
+      {
+        language: 'English (UK)',
+        code: 'en-gb',
+        voices: [
+          { name: 'Alice', sex: '(Female)' },
+          { name: 'Nancy', sex: '(Female)' },
+          { name: 'Lily', sex: '(Female)' },
+          { name: 'Harry', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'English (USA)',
+        code: 'en-us',
+        voices: [
+          { name: 'Linda', sex: '(Female)' },
+          { name: 'Amy', sex: '(Female)' },
+          { name: 'Mary', sex: '(Female)' },
+          { name: 'John', sex: '(Male)' },
+          { name: 'Mike', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'French (Canada)',
+        code: 'fr-ca',
+        voices: [
+          { name: 'Emile', sex: '(Male)' },
+          { name: 'Olivia', sex: '(Female)' },
+          { name: 'Logan', sex: '(Male)' },
+          { name: 'Felix', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'French (France)',
+        code: 'fr-fr',
+        voices: [
+          { name: 'Bette', sex: '(Female)' },
+          { name: 'Iva', sex: '(Female)' },
+          { name: 'Zola', sex: '(Female)' },
+          { name: 'Axel', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'French (Switzerland)',
+        code: 'fr-ch',
+        voices: [{ name: 'Theo', sex: '(Male)' }]
+      },
+      {
+        language: 'German (Austria)',
+        code: 'de-at',
+        voices: [
+          { name: 'Lukas', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'German (Germany)',
+        code: 'de-de',
+        voices: [
+          { name: 'Hanna', sex: '(Female)' },
+          { name: 'Lina', sex: '(Female)' },
+          { name: 'Jonas', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'German (Switzerland)',
+        code: 'de-ch',
+        voices: [
+          { name: 'Tim', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'Portuguese (Brazil)',
+        code: 'pt-br',
+        voices: [
+          { name: 'Marcia', sex: '(Female)' },
+          { name: 'Ligia', sex: '(Female)' },
+          { name: 'Yara', sex: '(Female)' },
+          { name: 'Dinis', sex: '(Male)' }
+        ]
+      },
+      {
+        language: 'Portuguese (Portugal)',
+        code: 'pt-pt',
+        voices: [
+          { name: 'Leonor', sex: '(Female)' }
+        ]
+      }
+    ];
+
+
+    // Populate the voice dropdown
+    window.onload = function () {
+      const select = document.getElementById('voiceSelect');
+
+      for (const language of languagesVoices) {
+        const group = document.createElement('optgroup');
+        group.label = language.language;
+
+        language.voices.forEach(voice => {
+          const option = document.createElement('option');
+          option.value = voice.name;
+          option.textContent = `${voice.name} ${voice.sex}`;
+          group.appendChild(option);
+        });
+
+        select.appendChild(group);
+      }
+    };
+
+    function mapVoiceToName(voice) {
+      return voice.name;
+    }
+
+    async function submitText() {
+      const text = document.getElementById('text').value;
+      const selectedVoice = document.getElementById('voiceSelect').value;
+
+      const selectedLanguage = languagesVoices.find(lv => lv.voices.map(mapVoiceToName).includes(selectedVoice)).code;
+
+      const queryParams = new URLSearchParams({
+        text: text,
+        language: selectedLanguage,
+        voice: selectedVoice
+      });
+
+      const response = await fetch(`/api/v1/text-to-speech/async?${queryParams}`);
+
+      let result = await response.json();
+      document.getElementById('result').innerText = 'Processing ID: ' + result.id;
+    }
+
+    async function checkStatus() {
+      document.getElementById('result').innerText = null;
+      const id = document.getElementById('ttsId').value;
+      const response = await fetch(`/api/v1/text-to-speech/${id}`);
+      const result = await response.json();
+
+      if (result.status === 'COMPLETED') {
+        const response = await fetch(`/api/v1/text-to-speech/${id}/audio`);
+        const audioBytes = await response.arrayBuffer();
+        const blob =  new Blob([audioBytes], { type: 'audio/mp3' });
+        document.getElementById('audioPlayer').src = URL.createObjectURL(blob);
+        document.getElementById('audioPlayer').style.display = 'block';
+        document.getElementById('status').innerText = null;
+      } else {
+        document.getElementById('status').innerText = 'Status: ' + result.status;
+      }
+    }
+  </script>
+</head>
+<body>
+<h1>Text-to-Speech</h1>
+
+<textarea id="text" placeholder="Enter text..."></textarea>
+<br>
+
+<label for="voiceSelect">Select Voice:</label>
+<select id="voiceSelect"></select>
+<br>
+
+<button onclick="submitText()">Submit</button>
+
+<h2>Check Status</h2>
+<input type="text" id="ttsId" placeholder="Enter Request ID">
+<button onclick="checkStatus()">Check</button>
+
+<p id="result"></p>
+<p id="status"></p>
+<audio id="audioPlayer" controls style="display:none;"></audio>
+</body>
+</html>

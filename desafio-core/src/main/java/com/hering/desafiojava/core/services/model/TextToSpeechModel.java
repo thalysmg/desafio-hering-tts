@@ -1,7 +1,7 @@
 package com.hering.desafiojava.core.services.model;
 
 import com.hering.desafiojava.core.entities.TextToSpeech;
-import com.hering.desafiojava.core.entities.TextToSpeechStatus;
+import com.hering.desafiojava.core.enums.TextToSpeechStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,16 +11,16 @@ import java.time.Instant;
 @Setter
 public class TextToSpeechModel {
     private Long id;
-    private Instant momment;
+    private Instant moment;
     private String language;
     private String voice;
     private String text;
     private TextToSpeechStatus status;
 
-    public TextToSpeech toEntity(){
+    public TextToSpeech toEntity() {
         var entity = new TextToSpeech();
 
-        entity.setMomment(getMomment());
+        entity.setMoment(getMoment());
         entity.setLanguage(getLanguage());
         entity.setVoice(getVoice());
         entity.setText(getText());
@@ -29,10 +29,10 @@ public class TextToSpeechModel {
         return entity;
     }
 
-    public static TextToSpeechModel fromEntity(TextToSpeech entity){
+    public static TextToSpeechModel fromEntity(TextToSpeech entity) {
         var model = new TextToSpeechModel();
         model.setId(entity.getId());
-        model.setMomment(entity.getMomment());
+        model.setMoment(entity.getMoment());
         model.setLanguage(entity.getLanguage());
         model.setText(entity.getText());
         model.setStatus(entity.getStatus());
